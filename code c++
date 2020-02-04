@@ -1,0 +1,53 @@
+#include<stdio.h>
+
+int bin[100] = {0};
+
+int count = 0;
+
+void getBinary(unsigned n,int tempCount) 
+{ 
+    if (n > 1) getBinary(n/2,tempCount + 1); 
+  
+    bin[tempCount] = n % 2; 
+} 
+
+int main(){
+	
+	int input;
+	
+	scanf("%d",&input);
+	
+	int x,y,n;
+	
+	for(int i=0;i<input;i++){
+		scanf("%d %d %d",&x,&y,&n);
+		
+		int answer = 1;
+		count = 0;
+			
+		for(int i=0;i<100;i++){
+			bin[i] = 0;
+		}
+	
+		getBinary(y,count);
+		
+		int index = 0;
+		
+		while(y != 0){
+			
+			if(bin[index] == 1) answer= (answer*x) % n;
+			x = (x*x) % n;
+			
+			y /= 2;
+			index++;
+		}
+	
+		printf("%d\n",answer);
+	}
+	
+	int a;
+	
+	scanf("%d",&a);
+	
+	return 0;
+}
